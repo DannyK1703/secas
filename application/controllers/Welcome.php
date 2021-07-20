@@ -4,11 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Welcome extends CI_Controller {
 
 	public function index() {
+		$this->accueil();
+	}
+	public function accueil(){
 		$this->load->view('index');
 	}
 	public function deconnexion(){
         session_destroy();
-        redirect('index');
+        redirect('Welcome/accueil');
     }
 	public function connexion()
 	{
@@ -48,14 +51,22 @@ class Welcome extends CI_Controller {
 				'nom'=>$user->nomUtilisateur, 'login'=>$login,'phone'=>$user->phone);
 				$this->accuielNotaire();
 			}
-			else{
+			else if($user->typeUser=='Min'){
 				$id=array('Utilisateur_idUtilisateur'=>$user->idUtilisateur);
 				$agent=$this->utilisateur->getAgentmin($id);
 				$mat=$agent->matriculeAgentMin;
-				$fonct=$agent->fonctionAgentMin;
+				
 				$info=array('id'=>$user->idUtilisateur, 'matricule'=>$mat, 'fonction'=>$fonct,'nom'=>$user->nomUtilisateur, 'login'=>$login,'phone'=>$user->phone);
 			
 			$this->accueilMin();
+			}else if($user->typeUser=='Admin'){
+				$id=array('Utilisateur_idUtilisateur'=>$user->idUtilisateur);
+				$agent=$this->utilisateur->getAdmin($id);
+				$mat=$agent->matriculeAdmin;
+				
+				$info=array('id'=>$user->idUtilisateur, 'matricule'=>$mat, 'nom'=>$user->nomUtilisateur, 'login'=>$login,'phone'=>$user->phone);
+			
+			$this->accueilAdmin();
 			}
 			
 			$this->session->set_userdata($info);
@@ -75,6 +86,16 @@ class Welcome extends CI_Controller {
 		$this->load->view('ministere/head',$b);
 		$this->load->view('ministere/accueilministere',$data);
 		$this->load->view('ministere/footer');
+	}
+	public function accueilAdmin(){
+		$this->load->model('utilisateur');
+		$b['a']=1;
+		$data['agents']=$this->utilisateur->getInfosAgentSecas();
+		$data['mins']=$this->utilisateur->getInfosAgentmin();
+		$data['notaires']=$this->utilisateur->getInfosNotaire();
+		$this->load->view('admin/head',$b);
+		$this->load->view('admin/accueilAdmin',$data);
+		$this->load->view('admin/footer');
 	}
 	public function attestationsMin(){
 		$this->load->model('utilisateur');
@@ -323,4 +344,109 @@ class Welcome extends CI_Controller {
 		$this->utilisateur->newRente($data);
 		$this->listeRentes();
 	}
+	public function newUser(){
+		$nom=$this->input->post('nom');
+		$phone=$this->input->post('phone');
+		$type=$this->input->post('type');
+		$matricule=$this->input->post('matricule');
+		$fonction=$this->input->post('fonction');
+		$prov=$this->input->post('prov');
+		$pwd=$nom."@".$matricule;
+		$data=array(
+			"nomUtilisateur"=>$nom,
+			"phone"=>$phone,
+			"typeUser"=>$type,
+			"login"=>$matricule,
+			"pwd"=>$pwd
+		);
+		$this->load->model("utilisateur");
+		$id=$this->utilisateur->newUser($data);
+		if($type=="min"){
+			$min=array(
+				"matriculeAgentMin"=>$matricule,
+				"fonctionAgentMin"=>$fonction,
+				"Utilisateur_idUtilisateur"=>$id
+			);
+			$this->utilisateur->newAgentMin($min);
+		}else if($type="secas"){
+			$secas=array(
+				"matriculeAgentSECAS"=>$matricule,
+				"provinceAgentSECAS"=>$prov,
+				"Utilisateur_idUtilisateur"=>$id
+				
+			);
+			$this->utilisateur->newAgentSecas($secas);
+		}else if($type=="notaire"){
+			$notaire=array(
+				"matriculeNotaire"=>$matricule,
+				"provinceNotaire"=>$prov,
+				"Utilisateur_idUtilisateur"=>$id
+			);
+			$this->utilisateur->newNotaire($notaire);
+		}
+		$this->accueilAdmin();
+	}
+	public function updateUser($ids){
+		$id=array("Utilisateur_idUtilisateur"=>$ids);
+		$nom=$this->input->post('nom');
+		$phone=$this->input->post('phone');
+		$type=$this->input->post('type');
+		$matricule=$this->input->post('matricule');
+		$fonction=$this->input->post('fonction');
+		$prov=$this->input->post('prov');
+		$login=$this->input->post('login');
+		$pwd=$this->input->post('pwd');
+		$data=array(
+			"nomUtilisateur"=>$nom,
+			"phone"=>$phone,
+			"typeUser"=>$type,
+			"login"=>$login,
+			"pwd"=>$pwd
+		);
+		$this->load->model("utilisateur");
+		$this->utilisateur->updateUser(["idUtilisateur"=>$ids],$data);
+		if($type=="min"){
+			$min=array(
+				"matriculeAgentMin"=>$matricule,
+				"fonctionAgentMin"=>$fonction,
+				"Utilisateur_idUtilisateur"=>$ids
+			);
+			$this->utilisateur->updateAgentMin($id,$min);
+		}else if($type="secas"){
+			$secas=array(
+				"matriculeAgentSECAS"=>$matricule,
+				"provinceAgentSECAS"=>$prov,
+				"Utilisateur_idUtilisateur"=>$ids
+				
+			);
+			$this->utilisateur->updateAgentSecas($id,$secas);
+		}else if($type=="notaire"){
+			$notaire=array(
+				"matriculeNotaire"=>$matricule,
+				"provinceNotaire"=>$prov,
+				"Utilisateur_idUtilisateur"=>$ids
+			);
+			$this->utilisateur->updateNotaire($id,$notaire);
+		}
+		$this->accueilAdmin();
+	}
+	public function suppUser($id,$type){
+		$this->load->model("utilisateur");
+		$data=array("Utilisateur_idUtilisateur"=>$id);
+		$id=array("idUtilisateur"=>$id);
+
+		if($type="notaire"){
+			$this->utilisateur->suppNotaire($data);
+		}
+		else if($type="secas"){
+			$this->utilisateur->suppAgentsecas($data);
+		}else if($type="min"){
+			$this->utilisateur->suppAgentmin($data);
+		}
+		$this->utilisateur->suppUser($id);
+		$this->accueilAdmin();
+	}
+	
 }
+
+

@@ -19,9 +19,9 @@
                             </div>
                             <u><h5 style="text-align:center"><b>Rente de Survie</b></h5></u>
                             <div class="content table-responsive table-full-width">
-                               <div class="container"> <p>Nous membre de la famille de l'officier <?=$militaire->NomMilitaire?> reconnaissons avons fournis les informations suivantes conformement au P.V du conseil de fammille en rapport avec la prise en charge de la famille du defunt :
+                               <div class=""> <p>Nous membre de la famille de l'officier <?=$militaire->NomMilitaire?> reconnaissons avons fournis les informations suivantes conformement au P.V du conseil de fammille en rapport avec la prise en charge de la famille du defunt :
                                 </p></div>
-								<div class="container">
+								<div class="">
                                 <table class="table table-striped">
                                     <thead>
                                         

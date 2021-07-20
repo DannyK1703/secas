@@ -101,7 +101,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a class="btn btn-danger" href="<?= site_url('Welcome->deconnexion')?>">Deconnexion</a>
+        <a class="btn btn-danger" href="<?= site_url('Welcome/deconnexion')?>">Deconnexion</a>
       </div>
     </div>
   </div>

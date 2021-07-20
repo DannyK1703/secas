@@ -19,9 +19,9 @@
                             </div>
                             <u><h5 style="text-align:center"><b>Attestation de Prise en charge</b></h5></u>
                             <div class="content table-responsive table-full-width">
-                               <div class="container"> <p>Les informations reprises sur le présent document conformement a la rente de survie de la famille de l'officier <?=$militaire->NomMilitaire?> sont veridiques conformement aux informations en notre possession ainsi nous approuvont les informations suivantes :
+                               <div class=""> <p>Les informations reprises sur le présent document conformement a la rente de survie de la famille de l'officier <?=$militaire->NomMilitaire?> sont veridiques conformement aux informations en notre possession ainsi nous approuvont les informations suivantes :
                                 </p></div>
-								<div class="container">
+								<div class="">
                                 <table class="table table-striped">
                                     <thead>
                                         

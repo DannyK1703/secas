@@ -34,46 +34,48 @@
 						
                     </div>
                 </div>
+				</div>
 </div>
+
  
 		<div class="row">
                     
 					<div class="col-lg-12 col-md-7">
-					<h4 style="text-align:center">TABLEAU DE BORD</h4></div></div>
-		<div class="row" style="padding:20px;">
-		<?php foreach ($budjets as $budjet){?>  
-	              
-            
-				
-				  <div class="col-lg-3 col-md-6">        
-				  <div class="card">
-							  <div class="content">
-								  <div class="row">
-									  <div class="col-xs-5">
-										  <div class="icon-big icon-success text-center">
-											  <i class="ti-wallet"></i>
-										  </div>
-									  </div>
-									  <div class="col-xs-7">
-										  <div class="numbers">
-											  <p>Prevision Budjetaire de l'Année <?= $budjet->annee?></p>
-											  <?= $budjet->montant?>Fc
-										  </div>
-									  </div>
-								  </div>
-								  <div class="footer">
-									  <hr>
-									  <div class="stats">
-										  <i class="ti-calendar"></i> <?= $budjet->annee?>
-									  </div>
-								  </div>
-							  </div>
-						  </div>
-				  </div>
-			  </div>
-			  <?php }?>
-		  </div>
-		
+						<h4 style="text-align:center">TABLEAU DE BORD</h4>
+					</div>
+		</div>
+						<div class="row" style="padding:20px;">
+						<?php foreach ($budjets as $budjet){?>  
+								
+								<div class="col-lg-3 col-md-6">        
+									<div class="card">
+												<div class="content">
+													<div class="row">
+														<div class="col-xs-5">
+															<div class="icon-big icon-success text-center">
+																<i class="ti-wallet"></i>
+															</div>
+														</div>
+														<div class="col-xs-7">
+															<div class="numbers">
+																<p>Prevision Budjetaire de l'Année <?= $budjet->annee?></p>
+																<?= $budjet->montant?>Fc
+															</div>
+														</div>
+													</div>
+													<div class="footer">
+														<hr>
+														<div class="stats">
+															<i class="ti-calendar"></i> <?= $budjet->annee?>
+														</div>
+													</div>
+												</div>
+									</div>
+								</div>
+							
+							<?php }?>
+						</div>
+					
 		<div class="row">
                     
 					<div class="col-lg-6 col-md-7">
@@ -87,7 +89,7 @@
 							<p><?=$budjet->annee?></p>
 								<div class="progress">
 									
-									<div class="progress-bar progress-bar-striped" role="progressbar" style="width: <?= ($budjet->montant*100)/100000?>%" aria-valuenow="<?= ($budjet->montant*100)/100000?>" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar progress-bar-striped" role="progressbar" style="width: <?= ($budjet->montant*100)/100000?>%" aria-valuenow="<?= ($budjet->montant*100)/5000000?>" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								
 								<?php }?>

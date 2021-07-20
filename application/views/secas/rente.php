@@ -18,43 +18,45 @@
                                 
                             </div>
                             <u><h5 style="text-align:center"><b>Rente de Survie</b></h5></u>
-                            <div class="content table-responsive table-full-width">
-                               <div class="container"> <p>Nous membre de la famille de l'officier <?=$militaire->NomMilitaire?> reconnaissons avons fournis les informations suivantes conformement au P.V du conseil de fammille en rapport avec la prise en charge de la famille du defunt :
-                                </p></div>
-								<div class="container">
-                                <table class="table table-striped">
-                                    <thead>
-                                        
-                                    	
-                                    </thead>
-                                    <tbody>
-                                        <tr><th>Ayant Droit</th></tr>
-                                        <tr><td>0</td>
-										<td><?= $liquid->nomMembre?></td><td><?=$liquid->parente?></td>
-                                        	
-                                        	
-                                        </tr>
-                                        <tr><th>Liste des Membres de famille a prendre en charge</th></tr>
-										<?php $i=1;foreach ($membres as $membre){?>
-                                        <tr>
+							<p>Nous membre de la famille de l'officier <?=$militaire->NomMilitaire?> reconnaissons avons fournis les informations suivantes conformement au P.V du conseil de fammille en rapport avec la prise en charge de la famille du defunt :
+                                	</p>
+                            <div class="content table-responsive ">
+                               
+								<div class="">
+									<table class="table table-striped">
+										<thead>
 											
-                                        	<td><?= $i?></td>
-                                        	<td><?=$membre->nomMembre?></td>
-                                        	<td><?=$membre->parente?></td>
-                                        	
-                                        </tr>
-                                    <?php $i++;}?>
-                                        
-                                    </tbody>
-                                </table></div>
+											
+										</thead>
+										<tbody>
+											<tr><th>Ayant Droit</th></tr>
+											<tr><td>0</td>
+											<td><?= $liquid->nomMembre?></td><td><?=$liquid->parente?></td>
+												
+												
+											</tr>
+											<tr><th>Liste des Membres de famille a prendre en charge</th></tr>
+											<?php $i=1;foreach ($membres as $membre){?>
+											<tr>
+												
+												<td><?= $i?></td>
+												<td><?=$membre->nomMembre?></td>
+												<td><?=$membre->parente?></td>
+												
+											</tr>
+											<?php $i++;}?>
+											
+										</tbody>
+									</table>
+								</div>
                                 <div class="header">
                                     <div style="text-align:right;">
                                     <p> Fait a Lubumbashi le <?= $dates['date'];?><br/>Agent: <?=$agent->nomUtilisateur?><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></p>
                                     </div>
                                 
                             
-                        </div>
-                    </div>
+                        		</div>
+                    		</div>
 
 
                 </div>
