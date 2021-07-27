@@ -54,5 +54,42 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="<?= base_url('assets/js/demo.js')?>"></script>
+	<script>
+function imprimer(divName) {
+      var printContents = document.getElementById(divName).innerHTML;    
+   var originalContents = document.body.innerHTML;      
+   document.body.innerHTML = printContents;     
+   window.print();     
+   document.body.innerHTML = originalContents;
+   }
+</script>
+
+	<script type="text/javascript">
+    	$(document).ready(function(){
+
+
+
+
+			
+
+        	demo.initChartist();
+
+        	$.notify({
+            	icon: 'ti-gift',
+            	message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
+
+            },{
+                type: 'success',
+                timer: 4000
+            });
+
+    	});
+
+	</script>
+
+	
+
+
+
 
 </html>

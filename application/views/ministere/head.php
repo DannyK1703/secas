@@ -25,8 +25,7 @@
     <link href="<?= base_url('assets/css/demo.css')?>" rel="stylesheet" />
 
     <!--  Fonts and icons     -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    
     <link href="<?= base_url('assets/css/themify-icons.css')?>" rel="stylesheet">
 
 </head>
@@ -35,10 +34,6 @@
 <div class="wrapper">
 	<div class="sidebar" data-background-color="white" data-active-color="danger">
 
-    <!--
-		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
-		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
-	-->
 
     	<div class="sidebar-wrapper">
             <div class="logo">
@@ -85,45 +80,49 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        
+                       
 						<li>
-                            <a href="#" data-toggle="modal" data-target="#exampleModal">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
                             <i class="ti-settings"></i>
 								Settings
                                 
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">SECAS/ Informations sur L'agent</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" >
-      <p style="text-align: center;font-size: 25px;" class="text-uppercase"><?=$this->session->login?></p>
-        <table class="table table-striped">
-        <tr><td><p>Nom:</p></td><td><p class="text-uppercase"> <?=$this->session->nom?></p></td></tr>
-        <tr><td><p>Matricule:</p> </td><td><p class="text-uppercase"><?=$this->session->matricule?></p></td></tr>
-        <tr><td><p>Fonction:</p> </td><td><p class="text-uppercase"><?=$this->session->fonction?></p></td></tr>
-        <tr><td><p>Telephone:</p> </td><td><p class="text-uppercase"><?=$this->session->phone?></p></td></tr></table>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a class="btn btn-danger" href="<?= site_url('Welcome/deconnexion')?>">Deconnexion</a>
-      </div>
-    </div>
-  </div>
-</div>
+                                
                             </a>
                         </li>
                     </ul>
 
                 </div>
+                                
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">SECAS/ Informations sur L'agent</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body" >
+									<p style="text-align: center;font-size: 25px;" class="text-uppercase"><?=$this->session->login?></p>
+										<table class="table table-striped">
+										<tr><td><p>Nom:</p></td><td><p class="text-uppercase"> <?=$this->session->nom?></p></td></tr>
+										<tr><td><p>Matricule:</p> </td><td><p class="text-uppercase"><?=$this->session->matricule?></p></td></tr>
+										<tr><td><p>Fonction:</p> </td><td><p class="text-uppercase"><?=$this->session->fonction?></p></td></tr>
+										<tr><td><p>Telephone:</p> </td><td><p class="text-uppercase"><?=$this->session->phone?></p></td></tr></table>
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<a class="btn btn-danger" href="<?= site_url('Welcome/deconnexion')?>">Deconnexion</a>
+									</div>
+									</div>
+								</div>
+							</div>
+                            
+								
             </div>
         </nav>
         
-  
+		
 
 <!-- Modal -->

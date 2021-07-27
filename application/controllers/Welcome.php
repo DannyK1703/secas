@@ -36,7 +36,7 @@ class Welcome extends CI_Controller {
 				$agent=$this->utilisateur->getAgentSecas($id);
 				$mat=$agent->matriculeAgentSECAS;
 				$prov=$agent->provinceAgentSECAS;
-				$info=array('id'=>$user->idUtilisateur,'matricule'=>$mat,'province'=>$prov,'typeUser'=>$user->typeUser, 
+				$info=array('idag'=>$agent->idAgentSECAS,'id'=>$user->idUtilisateur,'matricule'=>$mat,'province'=>$prov,'typeUser'=>$user->typeUser, 
 				'nom'=>$user->nomUtilisateur, 'login'=>$login,'phone'=>$user->phone);
 				$this->session->set_userdata($info);
 				$this->accueilAgent();
@@ -49,6 +49,7 @@ class Welcome extends CI_Controller {
 					
 				$info=array('id'=>$user->idUtilisateur,'matricule'=>$mat,'province'=>$prov,'typeUser'=>$user->typeUser, 
 				'nom'=>$user->nomUtilisateur, 'login'=>$login,'phone'=>$user->phone);
+				$this->session->set_userdata($info);
 				$this->accuielNotaire();
 			}
 			else if($user->typeUser=='Min'){
@@ -56,17 +57,17 @@ class Welcome extends CI_Controller {
 				$agent=$this->utilisateur->getAgentmin($id);
 				$mat=$agent->matriculeAgentMin;
 				
-				$info=array('id'=>$user->idUtilisateur, 'matricule'=>$mat, 'fonction'=>$fonct,'nom'=>$user->nomUtilisateur, 'login'=>$login,'phone'=>$user->phone);
-			
-			$this->accueilMin();
+				$info=array('id'=>$user->idUtilisateur, 'matricule'=>$mat, 'fonction'=>$agent->fonctionAgentMin,'nom'=>$user->nomUtilisateur, 'login'=>$login,'phone'=>$user->phone);
+				$this->session->set_userdata($info);
+				$this->accueilMin();
 			}else if($user->typeUser=='Admin'){
 				$id=array('Utilisateur_idUtilisateur'=>$user->idUtilisateur);
 				$agent=$this->utilisateur->getAdmin($id);
 				$mat=$agent->matriculeAdmin;
 				
 				$info=array('id'=>$user->idUtilisateur, 'matricule'=>$mat, 'nom'=>$user->nomUtilisateur, 'login'=>$login,'phone'=>$user->phone);
-			
-			$this->accueilAdmin();
+				$this->session->set_userdata($info);
+				$this->accueilAdmin();
 			}
 			
 			$this->session->set_userdata($info);
@@ -78,11 +79,33 @@ class Welcome extends CI_Controller {
 			$this->index();
 		}
 	}
+	public function afficherArchive(){
+		$a=$this->input->post('date');
+		$this->listeDocument($a);
+	}
+	public function listeDocument($dat){
+		$b['a']=3;
+		$this->load->model('utilisateur');
+		$date=array('anneeDocument'=>$dat);
+		$data['documents']=$this->utilisateur->getDocuments($date);
+		$data['dates']=$this->utilisateur->getAnnes();
+		$this->load->view('secas/head',$b);
+		$this->load->view('secas/archive',$data);
+		$this->load->view('secas/footer');
+	}
+	public function fetch_data(){
+		$this->load->model('utilisateur');
+		$data=$this->utilisateur->getBugets();
+		
+		echo json_encode($data);
+	}
 	public function accueilMin()
 	{
 		$this->load->model('utilisateur');
 		$b['a']=1;
 		$data['budjets']=$this->utilisateur->getBugets();
+		$data['attests']=$this->utilisateur->getNbrAttest(['etat'=>0]);
+		$data['attestv']=$this->utilisateur->getNbrAttest(['etat'=>1]);
 		$this->load->view('ministere/head',$b);
 		$this->load->view('ministere/accueilministere',$data);
 		$this->load->view('ministere/footer');
@@ -343,6 +366,51 @@ class Welcome extends CI_Controller {
 		$this->load->model('utilisateur');
 		$this->utilisateur->newRente($data);
 		$this->listeRentes();
+	}
+	public function newArchive(){
+		$titre=$this->input->post('titre');
+		$type=$this->input->post('type');
+		$desc=$this->input->post('desc');
+		$date=$this->input->post('date');
+		$annee=$this->input->post('annee');
+		$fichier=$this->input->post('fichier');
+		
+		$config['upload_path']          = './assets/img/documents/'.date('Y');
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['max_size']             = 10055;
+        $config['max_width']            = 102455;
+        $config['max_height']           = 76855;
+		$config['file_name'] 			= $type."_".$date."_".$fichier;
+        $this->load->library('upload', $config);
+		if (!is_dir('./assets/img/documents/'.date('Y'))) {
+			mkdir('./assets/img/documents/' . date('Y'), 0777, TRUE);
+		
+		}
+        if ( ! $this->upload->do_upload('doc'))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            echo 'echec';
+            //$this->load->view('upload_form', $error);
+        }
+        else
+        {
+            $data = array('upload_data' => $this->upload->data());
+            $ty=$data['upload_data'];
+            //echo 'reussite';
+			$idagent=$this->session->idag;
+			$date=array(
+				"titreDocument"=>$titre,
+				"typeDocument"=>$type,
+				"dateDocument"=>$date,
+				"descDocument"=>$desc,
+				'imgDocument'=>$ty['file_name'],
+				'anneeDocument'=>$annee,
+				'AgentSECAS_idAgentSECAS'=>$idagent
+			);
+			$this->load->model('utilisateur');
+			$this->utilisateur->newDocument($date);
+			$this->listeDocument(date('Y'));
+        }
 	}
 	public function newUser(){
 		$nom=$this->input->post('nom');

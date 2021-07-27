@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li class="<?php if($a==3){ echo 'active';}?>">
-                    <a href="<?= site_url('Welcome/listeArchives');?>">
+                    <a href="<?= site_url('Welcome/listeDocument/'.date('Y'));?>">
                         <i class="ti-map"></i>
                         <p>Archives</p>
                     </a>
@@ -83,35 +83,36 @@
                             <i class="ti-settings"></i>
 								Settings
                                 
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">SECAS/ Informations sur L'agent</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" >
-      <p style="text-align: center;font-size: 25px;" class="text-uppercase"><?=$this->session->login?></p>
-        <table class="table table-striped">
-        <tr><td><p>Nom:</p></td><td><p class="text-uppercase"> <?=$this->session->nom?></p></td></tr>
-        <tr><td><p>Matricule:</p> </td><td><p class="text-uppercase"><?=$this->session->matricule?></p></td></tr>
-        <tr><td><p>Province:</p> </td><td><p class="text-uppercase"><?=$this->session->province?></p></td></tr>
-        <tr><td><p>Telephone:</p> </td><td><p class="text-uppercase"><?=$this->session->phone?></p></td></tr></table>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a class="btn btn-danger" href="<?= site_url('Welcome/deconnexion')?>">Deconnexion</a>
-      </div>
-    </div>
-  </div>
-</div>
+                                
                             </a>
                         </li>
                     </ul>
 
                 </div>
+								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">SECAS/ Informations sur L'agent</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body" >
+											<p style="text-align: center;font-size: 25px;" class="text-uppercase"><?=$this->session->login?></p>
+												<table class="table table-striped">
+												<tr><td><p>Nom:</p></td><td><p class="text-uppercase"> <?=$this->session->nom?></p></td></tr>
+												<tr><td><p>Matricule:</p> </td><td><p class="text-uppercase"><?=$this->session->matricule?></p></td></tr>
+												<tr><td><p>Province:</p> </td><td><p class="text-uppercase"><?=$this->session->province?></p></td></tr>
+												<tr><td><p>Telephone:</p> </td><td><p class="text-uppercase"><?=$this->session->phone?></p></td></tr></table>
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<a class="btn btn-danger" href="<?= site_url('Welcome/deconnexion')?>">Deconnexion</a>
+											</div>
+											</div>
+										</div>
+								</div>
             </div>
         </nav>

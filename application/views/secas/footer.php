@@ -1,4 +1,4 @@
-<footer class="footer">
+		<footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
                     <ul>
@@ -54,6 +54,7 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="<?= base_url('assets/js/demo.js')?>"></script>
+	
 	<script>
 function imprimer(divName) {
       var printContents = document.getElementById(divName).innerHTML;    

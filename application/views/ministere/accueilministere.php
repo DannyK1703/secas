@@ -37,13 +37,74 @@
 				</div>
 </div>
 
- 
-		<div class="row">
+
+
+<input type="hidden" name="annee" value="annee"/>
+
+
+
+
+
+
+                        
+		
                     
 					<div class="col-lg-12 col-md-7">
 						<h4 style="text-align:center">TABLEAU DE BORD</h4>
 					</div>
-		</div>
+					<div class="row" style="padding:20px;">
+							<div class="col-lg-3 col-sm-6">
+								<div class="card">
+									<div class="content">
+										<div class="row">
+											<div class="col-xs-5">
+												<div class="icon-big icon-warning text-center">
+													<i class="ti-server"></i>
+												</div>
+											</div>
+											<div class="col-xs-7">
+												<div class="numbers">
+													<p>Attestations Validées</p>
+													<?= $attestv?>
+												</div>
+											</div>
+										</div>
+										<div class="footer">
+											<hr>
+											<div class="stats">
+												<i class="ti-reload"></i> Updated now
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><div class="col-lg-3 col-sm-6">
+								<div class="card">
+									<div class="content">
+										<div class="row">
+											<div class="col-xs-5">
+											
+                                        <div class="icon-big icon-danger text-center">
+                                            <i class="ti-pulse"></i>
+                                        </div>
+                                    
+											</div>
+											<div class="col-xs-7">
+												<div class="numbers">
+													<p>Attestations En Cours</p>
+													<?= $attests?>
+												</div>
+											</div>
+										</div>
+										<div class="footer">
+											<hr>
+											<div class="stats">
+												<i class="ti-reload"></i> Updated now
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+				</div>
 						<div class="row" style="padding:20px;">
 						<?php foreach ($budjets as $budjet){?>  
 								
@@ -59,7 +120,7 @@
 														<div class="col-xs-7">
 															<div class="numbers">
 																<p>Prevision Budjetaire de l'Année <?= $budjet->annee?></p>
-																<?= $budjet->montant?>Fc
+																<?= $budjet->montant?>$
 															</div>
 														</div>
 													</div>
@@ -76,9 +137,9 @@
 							<?php }?>
 						</div>
 					
-		<div class="row">
+		<div class="row my-3" >
                     
-					<div class="col-lg-6 col-md-7">
+					<div class="col-lg-10 col-md-10 py-3">
 						<div class="card">
 							<div class="header">
 								<h4 class="title">Statistique Attribution Budjet Annuel
@@ -86,6 +147,7 @@
 							</div>
 							<div class="content">
 							<?php foreach ($budjets as $budjet){?>
+								
 							<p><?=$budjet->annee?></p>
 								<div class="progress">
 									
@@ -96,32 +158,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-7">
-						<div class="card">
-							<div class="header">
-								<h4 class="title">Statistique Annuel Prise en Charge
-							</h4>
-							</div>
-							<div class="content">
-							 
-								<div class="progress">
-									
-									<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="212" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-								<div class="progress">
-									<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+
+					
+				
 		</div>
+		

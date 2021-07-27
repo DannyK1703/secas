@@ -83,12 +83,28 @@
 		public function getBugets(){
 			$this->db->select('idBudjet,montant,annee');
             $this->db->from($this->budjet);
+			$this->db->group_by('annee');
+			$this->db->order_by('annee','DESC');
 			$res=$this->db->get()->result();
             return $res;
 		}
-		public function getDocuments(){
-			$this->db->select('idDocument,titreDocument,dateDocument,typeDocument,descDocument');
-            $this->db->from($this->budjet);
+		public function getNbrAttest($a){
+			$this->db->where($a);
+			return $this->db->count_all_results($this->attestation);
+			
+		}
+		public function getDocuments($data){
+			$this->db->select('idDocument,titreDocument,dateDocument,typeDocument,descDocument,anneeDocument,imgDocument');
+            $this->db->from($this->document);
+			$this->db->where($data);
+			$res=$this->db->get()->result();
+			$this->db->order_by('dateDocument','DESC');
+            return $res;
+		}
+		public function getAnnes(){
+			$this->db->select('anneeDocument');
+			$this->db->from($this->document);
+			$this->db->distinct();
 			$res=$this->db->get()->result();
             return $res;
 		}
@@ -127,7 +143,7 @@
 			$this->db->join($this->utilisateur,$this->utilisateur.'.idUtilisateur='.$this->agentsecas.'.Utilisateur_idUtilisateur');
             
             $this->db->where($id);
-            $res=$this->db->get($this->utilisateur)->result();
+            $res=$this->db->get()->result();
             return $res[0];
         }
 		public function getInfosAgentSecas(){
@@ -263,6 +279,9 @@
         public function newRente($data){
             $this->db->insert($this->rentesurvie,$data);
         }
+		public function newDocument($data){
+			$this->db->insert($this->document,$data);
+		}
         public function newMembre($data){
             $this->db->insert($this->membre,$data);
         }
